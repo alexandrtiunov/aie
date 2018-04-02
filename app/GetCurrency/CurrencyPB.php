@@ -4,7 +4,10 @@ namespace App\GetCurrency;
 
 class CurrencyPB
 {
-
+    /**
+     * Get currency from privat bank API
+     * @return string
+     */
     public static function getKurs() {
         $curl = curl_init();
         if ( $curl ){

@@ -48,7 +48,7 @@ class OperationController extends Controller
         $operation ['currency'] = CurrencyPB::getKurs();
         $operation ['value_USD'] = (double)$operation['value_UAH']/$operation['currency'];
         $operation ['value_USD'] = round($operation ['value_USD'], 3);
-dd($operation);
+
         if (Operation::create($operation)) {
             return back()->with('success', 'Операция добавлена');
         }

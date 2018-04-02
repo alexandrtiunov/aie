@@ -11,7 +11,13 @@ use Faker\Provider\DateTime;
 
 class IndexController extends Controller
 {
-    public function index(){
+    /**
+     * Show main page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
 
         $operations = Operation::all();
 
@@ -22,10 +28,15 @@ class IndexController extends Controller
         $start = IndexController::date();
         $end = date('Y-m-d');
 
-        return view('index', ['operations' => $operations, 'income' =>$income, 'expenditure' => $expenditure,
+        return view('index', ['operations' => $operations, 'income' => $income, 'expenditure' => $expenditure,
             'total' => $total, 'start' => $start, 'end' => $end]);
     }
-    public function store(Request $request){
+
+    /**
+     * Choosing a gap in the calendar
+     */
+    public function store(Request $request)
+    {
 
         $date = $this->validate(request(), [
             'start_date' => 'required',
@@ -39,19 +50,25 @@ class IndexController extends Controller
 
         $operations = Operation::whereBetween('created_at', [new Carbon($start), new Carbon($end)])->get();
 
-        if($start > $end){
+        if ($start > $end) {
             return back()->with('error', 'Начальная дата, не должна привышать конечную');
-        }else{
+        } else {
             $expenditure = Operation::whereBetween('created_at', [new Carbon($start), new Carbon($end)])->sum('value_UAH');
         }
 
         $total = $income - $expenditure;
 
-        return view('index', ['operations' => $operations, 'income' =>$income, 'expenditure' => $expenditure, 'total' => $total, 'start' => $start, 'end' => $end]);
+        return view('index', ['operations' => $operations, 'income' => $income, 'expenditure' => $expenditure, 'total' => $total, 'start' => $start, 'end' => $end]);
 
     }
 
-    public function date(){
+    /**
+     * Takes 30 days from the current date
+     *
+     * @return string
+     */
+    public function date()
+    {
 
         $date = date("Y-m-d");
 

@@ -9,32 +9,37 @@ use Illuminate\Support\Facades\Auth;
 
 class WalletController extends Controller
 {
-    public function createWallet(){
-
+    /**
+     * Show the form for creating a new wallet.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createWallet()
+    {
         return view('wallets.addwalet');
     }
 
-    public function store(){
-
-        $wallet = $this->validate(request(), [
-            'name' => 'required',
-        ]);
-        $wallet ['user_id'] = Auth::user()->id;
-
-        if (Wallet::create($wallet)) {
-            return back()->with('success', 'Кошелёк добавлен');
-        }
-        return back()->with('error', 'error');
-    }
-
-    public function createIncome(){
+    /**
+     * Show the form for creating a new income.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createIncome()
+    {
 
         $wallets = Wallet::all();
 
         return view('wallets.moneyincoming', ['wallets' => $wallets]);
     }
 
-    public function addWallet(){
+    /**
+     * Store a newly created wallet in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addWallet()
+    {
 
         $walet = $this->validate(request(), [
             'name' => 'required',
@@ -46,7 +51,14 @@ class WalletController extends Controller
         }
     }
 
-    public function addIncome(){
+    /**
+     * Store a newly created income in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addIncome()
+    {
 
         $income = $this->validate(request(), [
             'sum' => 'required',
