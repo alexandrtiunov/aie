@@ -1,0 +1,19 @@
+#wrapper{
+    width: 1100px;
+    height: auto;
+    margin: auto;
+}
+#header{
+    width: 100%;
+    height: auto;
+}
+#totals{
+    width: 200px;
+    height: auto;
+}
+#date-form{
+    float: right;
+}
+.new_operation{
+    float: left;
+}
