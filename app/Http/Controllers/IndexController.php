@@ -39,9 +39,6 @@ class IndexController extends Controller
 
         $operations = Operation::whereBetween('created_at', [new Carbon($start), new Carbon($end)])->get();
 
-        foreach ($operations as $operation){
-//            var_dump($operation);
-        }
         if($start > $end){
             return back()->with('error', 'Начальная дата, не должна привышать конечную');
         }else{
@@ -49,7 +46,6 @@ class IndexController extends Controller
         }
 
         $total = $income - $expenditure;
-//        dd($total);
 
         return view('index', ['operations' => $operations, 'income' =>$income, 'expenditure' => $expenditure, 'total' => $total, 'start' => $start, 'end' => $end]);
 

@@ -21,9 +21,8 @@ class ProductController extends Controller
         $product = $this->validate(request(), [
             'name' => 'required',
             'category_id' => 'required',
-
         ]);
-//        dd($product);
+
         if (Product::create($product)) {
             return back()->with('success', 'Продукт добавлен');
         }

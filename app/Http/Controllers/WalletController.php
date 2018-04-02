@@ -12,7 +12,6 @@ class WalletController extends Controller
     public function createWallet(){
 
         return view('wallets.addwalet');
-
     }
 
     public function store(){
@@ -22,7 +21,6 @@ class WalletController extends Controller
         ]);
         $wallet ['user_id'] = Auth::user()->id;
 
-//        dd($wallet);
         if (Wallet::create($wallet)) {
             return back()->with('success', 'Кошелёк добавлен');
         }
@@ -43,7 +41,6 @@ class WalletController extends Controller
         ]);
         $walet ['user_id'] = Auth::user()->id;
 
-//        dd($walet);
         if (Wallet::create($walet)) {
             return back()->with('success', 'Данные добавлены');
         }
@@ -58,7 +55,6 @@ class WalletController extends Controller
         ]);
         $income ['user_id'] = Auth::user()->id;
 
-//        dd($income);
         if (Income::create($income)) {
             return back()->with('success', 'Данные добавлены');
         }
